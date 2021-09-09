@@ -1,0 +1,320 @@
+﻿@using FCSE_IT_Project.Models;
+@using System.Web.Script.Serialization;
+@model Tuple<IEnumerable<SelectListItem>, Order>
+
+@{
+    ViewBag.Title = "AddProductsToOrder";
+}
+
+<script src="~/Scripts/jquery-3.4.1.js">
+
+</script>
+
+<script type="text/javascript">
+    var products = [];
+    var tmp = "";
+    var orderId = @Model.Item2.Id;
+    $(document).ready(function () {
+        getProductsForOrder(orderId);
+        $("#Product").val(0);
+        $("#Product").change(function () {
+            var productId = $("#Product").val();
+            GetProductPrice(productId);
+        });
+
+        $("input[type=text]").change(function () {
+            CalculateSubTotal();
+        });
+
+        $("#btnAddProduct").click(function () {
+            addToTheProductList();
+        });
+
+        $("#btnSaveOrder").click(function () {
+            saveOrder();
+        });
+
+    });
+
+    function addToTheProductList() {
+        var unitPrice = $("#txtProductPrice").val();
+        var quantity = parseInt($("#txtProductQuantity").val());
+        var productId = $("#Product").val();
+        var productName = $("#Product option:selected").text();
+        var total = unitPrice * quantity;
+        var flag = 0;
+        var tmp = 0;
+
+
+        const product = {
+            orderID: orderId,
+            id: productId,
+            name: productName,
+            quant: quantity,
+            price: total
+        };
+
+        console.log(products);
+        for (var i = 0; i < products.length; i++) {
+            debugger;
+            if (product.name == products[i].name) {
+                flag = 1;
+                tmp = i;
+            }
+        }
+
+        if (flag == 1) {
+            products[tmp].quant += quantity;
+            products[tmp].price += total;
+        } else if (flag == 0) {
+            products.push(product);
+            debugger;
+        }
+        printProducts(products);
+        FinalTotal();
+        ResetItem();
+    }
+
+    function printProducts(products) {
+        $("#tblProducts tbody").empty();
+        var tblProducts = $("#tblProducts");
+        for (var i = 0; i < products.length; i++) {
+            var productList = "<tr class='products-list'><td hidden>" + products[i].id + "</td><td id='nameOfProduct'>" + products[i].name + "</td><td id='quantityOfProduct'>" + products[i].quant + "</td><td id='totalPrice'>" + products[i].price
+                + "</td><td><input type='button' value='Избриши' name='remove' class='btn btn-danger' onclick='RemoveProduct(this)'></td></tr>";
+            tblProducts.append(productList);
+        }
+    }
+
+    function RemoveProduct(productId) {
+        bootbox.prompt({
+            title: "Внесете лозинка за да ја избришете нарачката!",
+            inputType: 'password',
+            callback: function (result) {
+                console.log(result);
+                var password = result;
+                if (password == "izbrisi") {
+                    $(productId).closest('tr').remove();
+                    FinalTotal();
+                } else {
+                    return;
+                }
+            }
+        });
+
+    }
+    function RemoveProductSimple(productId) {
+        console.log("uleze u remove product simple");
+        $(productId).closest('tr').remove();
+        debugger;
+    }
+
+    function ResetItem() {
+        $("#txtProductPrice").val('0.00');
+        $("#txtProductQuantity").val('0');
+        $("#Product").val(0);
+        $("#txtProductTotal").val('0.00');
+    }
+
+    function confirmOrder() {
+        $.ajax({
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            type: "POST",
+            url: "/Orders/AddProductsToOrder",
+            data: JSON.stringify(products)
+        });
+    }
+
+    function getProductsForOrder(orderId) {
+        $.ajax({
+            async: true,
+            type: 'GET',
+            dataType: 'JSON',
+            contentType: 'application/json; charset=utf-8',
+            data: { orderId: orderId },
+            url: '/orders/getProducts',
+            success: function (data) {
+                if (data == "") {
+                    products = [];
+                } else {
+                    products = JSON.parse(data);
+                }
+
+            },
+            error: function () {
+                console.log("Има проблем при земање на продуктите!");
+            }
+        });
+    }
+
+    function saveOrder() {
+        bootbox.prompt({
+            title: "Внесете лозинка за да ја потврдите нарачката",
+            inputType: 'password',
+            callback: function (result) {
+                var password = result;
+                if (password == "0000") {
+                    confirmOrder();
+                } else {
+                    return;
+                }
+            }
+        });
+    }
+
+    function CalculateSubTotal() {
+        var unitPrice = $("#txtProductPrice").val();
+        var quantity = $("#txtProductQuantity").val();
+
+        var total = unitPrice * quantity;
+        $("#txtProductTotal").val(parseFloat(total).toFixed(2));
+    }
+
+    function FinalTotal() {
+        $("#txtFinalTotal").val("0");
+        var finalTotal = 0;
+        $("#tblProducts").find("tr:gt(0)").each(function () {
+            var total = parseInt($(this).find("td:eq(3)").text());
+
+            finalTotal += total;
+        });
+
+        $("#txtFinalTotal").val(finalTotal);
+    }
+
+    function GetProductPrice(productId) {
+        $.ajax({
+            async: true,
+            type: 'GET',
+            dataType: 'JSON',
+            contentType: 'application/json; charset=utf-8',
+            data: { productId: productId },
+            url: '/orders/getProductPrice',
+            success: function (data) {
+                $("#txtProductPrice").val(parseFloat(data).toFixed(2));
+            },
+            error: function () {
+                console.log("Има проблем при земање на цената на конкретниот продукт!");
+            }
+        });
+    }
+
+</script>
+
+<style>
+    fieldset {
+        border: 1px solid #ddd !important;
+        margin: 0;
+        xmin-width: 0;
+        padding: 10px;
+        position: relative;
+        border-radius: 4px;
+        background-color: #f5f5f5;
+        padding-left: 10px !important;
+    }
+
+    legend {
+        font-size: 14px;
+        font-weight: bold;
+        margin-bottom: 0;
+        width: 35%;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        padding: 5px 5px 5px 10px;
+        background-color: #ffffff;
+    }
+</style>
+
+<h2>Додадете продукти во вашата нарачка</h2>
+
+<fieldset>
+    <legend>
+        Нарачка :
+    </legend>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.Item2.Name, new { @readonly = "readonly" })
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    Вкупно :
+                    <input type="text" value="0" name="finalTotal" readonly="readonly" id="txtFinalTotal" class="form-control" />
+                </div>
+            </div>
+        </div>
+    </div>
+</fieldset>
+
+<fieldset>
+    <legend>
+        Продукти :
+    </legend>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    Име на продуктот :
+                    @Html.DropDownList("Product", new SelectList(Model.Item1, "Value", "Text"),
+                                        new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    Цена на продуктот :
+                    <input type="text" readonly="readonly" id="txtProductPrice" value="0.00" name="ProductPrice" class="form-control" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    Количина од продуктот :
+                    <input type="text" id="txtProductQuantity" value="0" name="ProductPrice" class="form-control" />
+
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    Вкупно :
+                    <input type="text" readonly="readonly" id="txtProductTotal" value="0.00" name="ProductPrice" class="form-control" />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <input type="button" style="margin-top: 10px" id="btnAddProduct" name="addProductToList" value="Додади продукт" class="btn btn-success" />
+                </div>
+            </div>
+        </div>
+    </div>
+</fieldset>
+<fieldset>
+    <legend>
+        Продукти во нарачката :
+    </legend>
+    <table style="width: 100%" id="tblProducts">
+        <thead>
+        <th hidden>
+            Product Id
+        </th>
+        <th>
+            Име
+        </th>
+        <th>
+            Количина
+        </th>
+        <th>
+            Цена
+        </th>
+        <th>
+        </th>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</fieldset>
+<div>
+    <input style="margin-top: 10px" type="submit" value="Зачувај нарачка" name="save" id="btnSaveOrder" class="btn btn-primary" />
+</div>
