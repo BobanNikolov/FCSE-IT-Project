@@ -1,6 +1,6 @@
 ﻿@using FCSE_IT_Project.Models;
 @using System.Web.Script.Serialization;
-@model Tuple<IEnumerable<SelectListItem>, Order>
+@model Tuple<IEnumerable<SelectListItem>, Order, List<tmpProduct>>
 
 @{
     ViewBag.Title = "AddProductsToOrder";
@@ -226,7 +226,7 @@
 </style>
 
 <h2>Додадете продукти во вашата нарачка</h2>
-
+<br />
 <fieldset>
     <legend>
         Нарачка :
@@ -315,6 +315,11 @@
         </tbody>
     </table>
 </fieldset>
+<br/>
 <div>
     <input style="margin-top: 10px" type="submit" value="Зачувај нарачка" name="save" id="btnSaveOrder" class="btn btn-primary" />
+</div>
+<br />
+<div>
+    @Html.ActionLink("Назад кон листата на нарачки", "Index")
 </div>
