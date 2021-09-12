@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using FCSE_IT_Project.Models;
+using System.Collections.Generic;
 
 namespace FCSE_IT_Project.Controllers
 {
@@ -21,7 +22,24 @@ namespace FCSE_IT_Project.Controllers
         public AccountController()
         {
         }
+        public ActionResult AddUserToRole()
+        {
+            AddToRoleModel model = new AddToRoleModel();
+            model.roles = new List<string>() { "Manager", "Waiter", "Client" };
+            return View(model);
+        }
+        [HttpPost]
+        [Authorize(Roles = "Manager")]
+        public ActionResult AddUserToRole(AddToRoleModel model)
+        {
+            var email = model.Email;
+            var user = UserManager.FindByEmail(email);
+            if (user == null)
+                throw new HttpException(404, "There is no user with email: " + model.Email);
 
+            UserManager.AddToRole(user.Id, model.selectedRole);
+            return RedirectToAction("Index", "Products");
+        }
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
         {
             UserManager = userManager;

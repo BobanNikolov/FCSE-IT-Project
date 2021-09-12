@@ -77,6 +77,13 @@ namespace FCSE_IT_Project.Models
         [Display(Name = "Phone Number")]
         public string PhoneNumber { get; set; }
     }
+    public class AddToRoleModel
+    {
+        [Required]
+        public string Email { get; set; }
+        public List<string> roles { get; set; }
+        public string selectedRole { get; set; }
+    }
 
     public class ConfigureTwoFactorViewModel
     {

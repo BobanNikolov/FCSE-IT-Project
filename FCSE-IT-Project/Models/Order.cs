@@ -14,6 +14,7 @@ namespace FCSE_IT_Project.Models
         }
         [Key]
         public int Id { get; set; }
+        [Display(Name = "Име на нарачка")]
         public string Name { get; set; }
         public virtual List<tmpProduct> order { get; set; }
     }

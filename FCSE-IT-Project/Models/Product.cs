@@ -14,8 +14,11 @@ namespace FCSE_IT_Project.Models
         }
         [Key]
         public int Id { get; set; }
+        [Display(Name="Име")]
         public string Name { get; set; }
+        [Display(Name = "Цена")]
         public int Price { get; set; }
+        [Display(Name = "Фотографија")]
         public string photoURL { get; set; }
     }
 }
