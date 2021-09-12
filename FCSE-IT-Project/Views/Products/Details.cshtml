@@ -39,4 +39,8 @@
 <p>
     @Html.ActionLink("Промени", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Назад кон листата на продукти", "Index")
+    @if (User.IsInRole("Manager"))
+    {
+        @Html.ActionLink("Промени улоги", "AddUserToRole", "Account")
+    }
 </p>

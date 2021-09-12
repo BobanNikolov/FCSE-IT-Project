@@ -44,5 +44,12 @@
             <input type="submit" value="Избриши" class="btn btn-default" /> |
             @Html.ActionLink("Назад кон листата на продукти", "Index")
         </div>
-    }
+        <div>
+            @if (User.IsInRole("Manager"))
+            {
+                @Html.ActionLink("Промени улоги", "AddUserToRole", "Account")
+            }
+        </div> 
+     }
+
 </div>

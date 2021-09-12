@@ -16,7 +16,6 @@ namespace FCSE_IT_Project.Controllers
     public class OrdersController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-        public Dictionary<Order, List<tmpProduct>> orderProducts = new Dictionary<Order, List<tmpProduct>>();
 
 
         // GET: Orders
@@ -109,7 +108,8 @@ namespace FCSE_IT_Project.Controllers
                 return HttpNotFound();
             }
             ProductsRepository objordersRepository = new ProductsRepository();
-            var objModels = new Tuple<IEnumerable<SelectListItem>, Order>(objordersRepository.GetAllProducts(), order);
+            List<tmpProduct> tmpProducts = order.order;
+            var objModels = new Tuple<IEnumerable<SelectListItem>, Order, List<tmpProduct>>(objordersRepository.GetAllProducts(), order, tmpProducts);
             return View(objModels);
         }
 
@@ -124,9 +124,9 @@ namespace FCSE_IT_Project.Controllers
                 List<tmpProduct> productsToWorkWith = tmpProducts.ToList();
                 Order order = db.Orders.Find(productsToWorkWith[0].OrderID);
                 order.order = productsToWorkWith;
-                ProductsRepository objordersRepository = new ProductsRepository();
-                var objModels = new Tuple<IEnumerable<SelectListItem>, Order>(objordersRepository.GetAllProducts(), order);
-                return View(objModels);
+                //ProductsRepository objordersRepository = new ProductsRepository();
+                //var objModels = new Tuple<IEnumerable<SelectListItem>, Order>(objordersRepository.GetAllProducts(), order);
+                return RedirectToAction("Index");
             }
             return RedirectToAction("Index");
         }
@@ -143,15 +143,16 @@ namespace FCSE_IT_Project.Controllers
         {
             Order order = db.Orders.Find(orderId);
             var products = new List<tmpProduct>();
-            if (!orderProducts.ContainsKey(order))
+            if (order.order != null)
             {
-                orderProducts.Add(order, new List<tmpProduct>());
-                products = orderProducts[order];
+                products = order.order;
             }
             else
             {
-                products = orderProducts[order];
+                order.order = new List<tmpProduct>();
             }
+            
+            
             var productsToReturn = new JavaScriptSerializer().Serialize(products);
             return Json(productsToReturn, JsonRequestBehavior.AllowGet);
         }

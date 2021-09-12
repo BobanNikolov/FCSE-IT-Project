@@ -41,7 +41,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Креирај" class="btn btn-default" />
             </div>
         </div>
     </div>
@@ -49,6 +49,12 @@
 
 <div>
     @Html.ActionLink("Назад кон листата на продукти", "Index")
+</div>
+<div>
+    @if (User.IsInRole("Manager"))
+    {
+        @Html.ActionLink("Промени улоги", "AddUserToRole", "Account")
+    }
 </div>
 
 @section Scripts {

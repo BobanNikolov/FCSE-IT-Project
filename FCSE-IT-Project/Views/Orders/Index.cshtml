@@ -4,6 +4,64 @@
     ViewBag.Title = "Index";
 }
 
+<style>
+    .btn-delete {
+        color: #fff;
+        background-color: #d9534f;
+        border-color: #d43f3a;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        border: 1px solid transparent;
+        padding: 6px 12px;
+        font-size: 14px;
+        border-radius: 4px;
+    }
+    .btn-delete:hover {
+        color: #fff;
+        background-color: #ac2925;
+        border-color: #761c19;
+        text-decoration: none;
+    }
+    .btn-details {
+        color: #fff;
+        background-color: #5bc0de;
+        border-color: #46b8da;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        border: 1px solid transparent;
+        padding: 6px 12px;
+        font-size: 14px;
+        border-radius: 4px;
+    }
+    .btn-details:hover {
+        color: #fff;
+        background-color: #31b0d5;
+        border-color: #269abc;
+        text-decoration: none;
+    }
+    .btn-edit {
+        color: #fff;
+        background-color: #f0ad4e;
+        border-color: #eea236;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        border: 1px solid transparent;
+        padding: 6px 12px;
+        font-size: 14px;
+        border-radius: 4px;
+    }
+
+        .btn-edit:hover {
+            color: #fff;
+            background-color: #ec971f;
+            border-color: #d58512;
+            text-decoration: none;
+        }
+</style>
+
 <h2>Почетна</h2>
 
 <p>
@@ -26,17 +84,23 @@
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
                 <td>
-                    @Html.ActionLink("Промени", "AddProductsToOrder", new { id = item.Id }) |
-                    @Html.ActionLink("Детали", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Промени", "AddProductsToOrder", new { id = item.Id }, new { @class = "btn-edit" })
+                    @Html.ActionLink("Детали", "Details", new { id = item.Id }, new { @class = "btn-details" })
                     @if (User.IsInRole("Manager"))
-                    { 
-                        @Html.ActionLink("Избриши", "Delete", new { id = item.Id })
+                    {
+                        @Html.ActionLink("Избриши", "Delete", new { id = item.Id }, new { @class = "btn-delete" })
                     }
-                </td>
+               </td>
             </tr>
         }
     </tbody>
 </table>
+<div>
+    @if (User.IsInRole("Manager"))
+    {
+        @Html.ActionLink("Промени улоги", "AddUserToRole", "Account")
+    }
+</div>
 
 @section scripts{
     <script>
