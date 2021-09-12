@@ -8,6 +8,7 @@ namespace FCSE_IT_Project
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());
+            filters.Add(new AuthorizeAttribute());
         }
     }
 }

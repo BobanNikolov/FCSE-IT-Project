@@ -500,6 +500,7 @@
     <Content Include="Views\Products\Edit.cshtml" />
     <Content Include="Views\Products\Index.cshtml" />
     <Content Include="Views\Orders\AddProductsToOrder.cshtml" />
+    <Content Include="Views\Account\AddUserToRole.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

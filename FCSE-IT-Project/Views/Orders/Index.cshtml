@@ -4,10 +4,10 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Почетна</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Креирајте нова нарачка", "Create")
 </p>
 <table id="ordersTable" class="table">
     <thead>
@@ -26,9 +26,12 @@
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "AddProductsToOrder", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    @Html.ActionLink("Промени", "AddProductsToOrder", new { id = item.Id }) |
+                    @Html.ActionLink("Детали", "Details", new { id = item.Id }) |
+                    @if (User.IsInRole("Manager"))
+                    { 
+                        @Html.ActionLink("Избриши", "Delete", new { id = item.Id })
+                    }
                 </td>
             </tr>
         }

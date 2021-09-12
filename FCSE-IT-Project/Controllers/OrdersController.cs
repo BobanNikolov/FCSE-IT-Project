@@ -12,6 +12,7 @@ using FCSE_IT_Project.Repositories;
 
 namespace FCSE_IT_Project.Controllers
 {
+    [Authorize(Roles ="Manager, Waiter")]
     public class OrdersController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -122,24 +123,7 @@ namespace FCSE_IT_Project.Controllers
                 tmpProduct[] tmpProducts = js.Deserialize<tmpProduct[]>(products);
                 List<tmpProduct> productsToWorkWith = tmpProducts.ToList();
                 Order order = db.Orders.Find(productsToWorkWith[0].OrderID);
-                if (!orderProducts.ContainsKey(order))
-                {
-                    orderProducts.Add(order, new List<tmpProduct>());
-                    IEnumerable<tmpProduct> tmp = orderProducts[order];
-                    List<tmpProduct> tmp1 = tmp.ToList();
-                    tmp1 = productsToWorkWith;
-                    orderProducts[order] = tmp1;
-                    return RedirectToAction("Index");
-                }
-                else if (orderProducts.ContainsKey(order))
-                {
-                    IEnumerable<tmpProduct> tmp = orderProducts[order];
-                    List<tmpProduct> tmp1 = tmp.ToList();
-                    tmp1.Clear();
-                    tmp1 = productsToWorkWith;
-                    orderProducts[order] = tmp1;
-                    return RedirectToAction("Index");
-                }
+                order.order = productsToWorkWith;
                 ProductsRepository objordersRepository = new ProductsRepository();
                 var objModels = new Tuple<IEnumerable<SelectListItem>, Order>(objordersRepository.GetAllProducts(), order);
                 return View(objModels);

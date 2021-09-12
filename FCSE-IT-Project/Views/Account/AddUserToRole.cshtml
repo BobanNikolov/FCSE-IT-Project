@@ -1,0 +1,19 @@
+﻿@model FCSE_IT_Project.Models.AddToRoleModel
+@{
+    ViewBag.Title = "AddUserToRole";
+}
+
+<h2>Додадете корисник со соодветната e-mail адреса на соодветна улога:</h2>
+@using (Html.BeginForm("AddUserToRole", "Account"))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.Email)
+        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.DropDownListFor(m => m.selectedRole, new SelectList(Model.roles), new { @class = "form-control" })
+
+    </div>
+
+    <button class="btn btn-success" type="submit">Зачувај</button>
+}
