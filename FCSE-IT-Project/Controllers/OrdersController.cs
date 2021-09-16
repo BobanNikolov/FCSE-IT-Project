@@ -17,7 +17,6 @@ namespace FCSE_IT_Project.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-
         // GET: Orders
         public ActionResult Index()
         {
@@ -108,27 +107,37 @@ namespace FCSE_IT_Project.Controllers
                 return HttpNotFound();
             }
             ProductsRepository objordersRepository = new ProductsRepository();
-            List<tmpProduct> tmpProducts = order.order;
-            var objModels = new Tuple<IEnumerable<SelectListItem>, Order, List<tmpProduct>>(objordersRepository.GetAllProducts(), order, tmpProducts);
+            List<tmpProduct> tmpList = new List<tmpProduct>();
+            foreach(var product in db.tmpProducts)
+            {
+                if(product.OrderID == order.Id)
+                {
+                    tmpList.Add(product);
+                }
+            }
+            ViewBag.tmpProducts = tmpList;
+            var objModels = new Tuple<IEnumerable<SelectListItem>, Order>(objordersRepository.GetAllProducts(), order);
             return View(objModels);
         }
 
         // POST: Orders/AddProductsToOrder
         [HttpPost]
-        public ActionResult AddProductsToOrder(string products)
+        public ActionResult AddProductsToOrder(List<tmpProduct> products)
         {
-            var js = new JavaScriptSerializer();
-            if (products != null)
+            foreach(var product in db.tmpProducts)
             {
-                tmpProduct[] tmpProducts = js.Deserialize<tmpProduct[]>(products);
-                List<tmpProduct> productsToWorkWith = tmpProducts.ToList();
-                Order order = db.Orders.Find(productsToWorkWith[0].OrderID);
-                order.order = productsToWorkWith;
-                //ProductsRepository objordersRepository = new ProductsRepository();
-                //var objModels = new Tuple<IEnumerable<SelectListItem>, Order>(objordersRepository.GetAllProducts(), order);
-                return RedirectToAction("Index");
+                if(product.OrderID == products[0].OrderID)
+                {
+                    db.tmpProducts.Remove(product);
+                }
             }
+            foreach(var product in products)
+            {
+                db.tmpProducts.Add(product);
+            }
+            db.SaveChanges();
             return RedirectToAction("Index");
+
         }
 
         [HttpGet]
@@ -138,24 +147,6 @@ namespace FCSE_IT_Project.Controllers
             return Json(productPrice, JsonRequestBehavior.AllowGet);
         }
 
-        [HttpGet]
-        public JsonResult getProducts(int orderId)
-        {
-            Order order = db.Orders.Find(orderId);
-            var products = new List<tmpProduct>();
-            if (order.order != null)
-            {
-                products = order.order;
-            }
-            else
-            {
-                order.order = new List<tmpProduct>();
-            }
-            
-            
-            var productsToReturn = new JavaScriptSerializer().Serialize(products);
-            return Json(productsToReturn, JsonRequestBehavior.AllowGet);
-        }
 
         [Authorize(Roles = "Manager")]
         // GET: Orders/Delete/5

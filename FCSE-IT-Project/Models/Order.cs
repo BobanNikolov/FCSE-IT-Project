@@ -10,12 +10,11 @@ namespace FCSE_IT_Project.Models
     {
         public Order()
         {
-            order = new List<tmpProduct>();
         }
         [Key]
         public int Id { get; set; }
         [Display(Name = "Име на нарачка")]
         public string Name { get; set; }
-        public virtual List<tmpProduct> order { get; set; }
+       // public virtual List<tmpProduct> order { get; set; }
     }
 }
