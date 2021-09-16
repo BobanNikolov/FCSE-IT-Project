@@ -1,6 +1,5 @@
 ﻿@using FCSE_IT_Project.Models;
-@using System.Web.Script.Serialization;
-@model Tuple<IEnumerable<SelectListItem>, Order, List<tmpProduct>>
+@model Tuple<IEnumerable<SelectListItem>, Order>
 
 @{
     ViewBag.Title = "AddProductsToOrder";
@@ -12,10 +11,10 @@
 
 <script type="text/javascript">
     var products = [];
-    var tmp = "";
     var orderId = @Model.Item2.Id;
     $(document).ready(function () {
-        getProductsForOrder(orderId);
+        getProducts();
+        FinalTotal();
         $("#Product").val(0);
         $("#Product").change(function () {
             var productId = $("#Product").val();
@@ -64,7 +63,7 @@
         }
 
         if (flag == 1) {
-            products[tmp].quant += quantity;
+            products[tmp].quantity += quantity;
             products[tmp].price += total;
         } else if (flag == 0) {
             products.push(product);
@@ -79,10 +78,26 @@
         $("#tblProducts tbody").empty();
         var tblProducts = $("#tblProducts");
         for (var i = 0; i < products.length; i++) {
-            var productList = "<tr class='products-list'><td hidden>" + products[i].id + "</td><td id='nameOfProduct'>" + products[i].name + "</td><td id='quantityOfProduct'>" + products[i].quant + "</td><td id='totalPrice'>" + products[i].price
+            var productList = "<tr class='products-list'><td hidden>" + products[i].id + "</td><td id='nameOfProduct'>" + products[i].name + "</td><td id='quantityOfProduct'>" + products[i].quantity + "</td><td id='totalPrice'>" + products[i].price
                 + "</td><td><input type='button' value='Избриши' name='remove' class='btn btn-danger' onclick='RemoveProduct(this)'></td></tr>";
+            debugger;
             tblProducts.append(productList);
         }
+    }
+
+    function getProducts() {
+        var tableTmpProduct = $("#tblProducts").find("tr:gt(0)");
+
+        $.each(tableTmpProduct, function () {
+            var product = {};
+            product.OrderId = orderId;
+            product.id = parseInt($(this).find("td:eq(0)").text());
+            product.name = $(this).find("td:eq(1)").text();
+            product.quantity = parseInt($(this).find("td:eq(2)").text());
+            product.price = parseInt($(this).find("td:eq(3)").text());
+            products.push(product);
+        });
+
     }
 
     function RemoveProduct(productId) {
@@ -103,7 +118,6 @@
 
     }
     function RemoveProductSimple(productId) {
-        console.log("uleze u remove product simple");
         $(productId).closest('tr').remove();
         debugger;
     }
@@ -116,34 +130,26 @@
     }
 
     function confirmOrder() {
+        var listOfTmpProducts = [];
+        var tableTmpProduct = $("#tblProducts").find("tr:gt(0)");
+
+        $.each(tableTmpProduct, function () {
+            var tmpProduct = {};
+            tmpProduct.OrderId = orderId;
+            tmpProduct.id = parseInt($(this).find("td:eq(0)").text());
+            tmpProduct.name = $(this).find("td:eq(1)").text();
+            tmpProduct.quantity = parseInt($(this).find("td:eq(2)").text());
+            tmpProduct.price = parseInt($(this).find("td:eq(3)").text());
+            listOfTmpProducts.push(tmpProduct);
+        });
+
+
         $.ajax({
             contentType: 'application/json; charset=utf-8',
             dataType: 'json',
             type: "POST",
             url: "/Orders/AddProductsToOrder",
-            data: JSON.stringify(products)
-        });
-    }
-
-    function getProductsForOrder(orderId) {
-        $.ajax({
-            async: true,
-            type: 'GET',
-            dataType: 'JSON',
-            contentType: 'application/json; charset=utf-8',
-            data: { orderId: orderId },
-            url: '/orders/getProducts',
-            success: function (data) {
-                if (data == "") {
-                    products = [];
-                } else {
-                    products = JSON.parse(data);
-                }
-
-            },
-            error: function () {
-                console.log("Има проблем при земање на продуктите!");
-            }
+            data: JSON.stringify(listOfTmpProducts)
         });
     }
 
@@ -161,6 +167,8 @@
             }
         });
     }
+
+ 
 
     function CalculateSubTotal() {
         var unitPrice = $("#txtProductPrice").val();
@@ -312,6 +320,16 @@
         </th>
         </thead>
         <tbody>
+            @foreach (var product in ViewBag.tmpProducts)
+            {
+                <tr class="products-list">
+                    <td hidden>@product.id</td>
+                    <td id="nameOfProduct">@product.name</td>
+                    <td id="quantityOfProduct">@product.quantity</td>
+                    <td id="totalPrice">@product.price</td>
+                    <td><input type='button' value='Избриши' name='remove' class='btn btn-danger' onclick='RemoveProduct(this)'></td>
+                </tr>
+            }
         </tbody>
     </table>
 </fieldset>

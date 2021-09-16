@@ -172,6 +172,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\tmpProductsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -182,6 +183,22 @@
     <Compile Include="Migrations\202109091636543_second.cs" />
     <Compile Include="Migrations\202109091636543_second.Designer.cs">
       <DependentUpon>202109091636543_second.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202109151856501_third.cs" />
+    <Compile Include="Migrations\202109151856501_third.Designer.cs">
+      <DependentUpon>202109151856501_third.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202109151905324_fourth.cs" />
+    <Compile Include="Migrations\202109151905324_fourth.Designer.cs">
+      <DependentUpon>202109151905324_fourth.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202109151910558_fifth.cs" />
+    <Compile Include="Migrations\202109151910558_fifth.Designer.cs">
+      <DependentUpon>202109151910558_fifth.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202109160847522_sixth.cs" />
+    <Compile Include="Migrations\202109160847522_sixth.Designer.cs">
+      <DependentUpon>202109160847522_sixth.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -501,6 +518,11 @@
     <Content Include="Views\Products\Index.cshtml" />
     <Content Include="Views\Orders\AddProductsToOrder.cshtml" />
     <Content Include="Views\Account\AddUserToRole.cshtml" />
+    <Content Include="Views\tmpProducts\Create.cshtml" />
+    <Content Include="Views\tmpProducts\Delete.cshtml" />
+    <Content Include="Views\tmpProducts\Details.cshtml" />
+    <Content Include="Views\tmpProducts\Edit.cshtml" />
+    <Content Include="Views\tmpProducts\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -524,6 +546,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202109091636543_second.resx">
       <DependentUpon>202109091636543_second.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202109151856501_third.resx">
+      <DependentUpon>202109151856501_third.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202109151905324_fourth.resx">
+      <DependentUpon>202109151905324_fourth.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202109151910558_fifth.resx">
+      <DependentUpon>202109151910558_fifth.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202109160847522_sixth.resx">
+      <DependentUpon>202109160847522_sixth.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

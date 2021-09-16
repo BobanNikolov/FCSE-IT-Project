@@ -33,5 +33,7 @@ namespace FCSE_IT_Project.Models
         public System.Data.Entity.DbSet<FCSE_IT_Project.Models.Order> Orders { get; set; }
 
         public System.Data.Entity.DbSet<FCSE_IT_Project.Models.Product> Products { get; set; }
+
+        public System.Data.Entity.DbSet<FCSE_IT_Project.Models.tmpProduct> tmpProducts { get; set; }
     }
 }
