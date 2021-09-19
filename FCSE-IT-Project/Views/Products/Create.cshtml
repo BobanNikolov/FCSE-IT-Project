@@ -4,7 +4,31 @@
     ViewBag.Title = "Create";
 }
 
+<style>
+    .btn-ordinary {
+        color: #fff;
+        background-color: #337ab7;
+        border-color: #2e6da4;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        border: 1px solid transparent;
+        padding: 6px 12px;
+        font-size: 14px;
+        border-radius: 4px;
+    }
+
+        .btn-ordinary:hover {
+            color: #fff;
+            background-color: #286090;
+            border-color: #204d74;
+            text-decoration: none;
+        }
+</style>
+
 <h2>Креирај</h2>
+
+
 
 
 @using (Html.BeginForm()) 
@@ -46,14 +70,14 @@
         </div>
     </div>
 }
-
 <div>
-    @Html.ActionLink("Назад кон листата на продукти", "Index")
+    @Html.ActionLink("Назад кон листата на продукти", "Index", "Products", new { @class = "btn-ordinary" })
 </div>
+<br />
 <div>
     @if (User.IsInRole("Manager"))
     {
-        @Html.ActionLink("Промени улоги", "AddUserToRole", "Account")
+        @Html.ActionLink("Промени улоги", "AddUserToRole", "Account", new { @class = "btn-ordinary" })
     }
 </div>
 

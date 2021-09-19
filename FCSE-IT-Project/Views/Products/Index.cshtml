@@ -66,10 +66,29 @@
             border-color: #d58512;
             text-decoration: none;
         }
+
+    .btn-ordinary {
+        color: #fff;
+        background-color: #337ab7;
+        border-color: #2e6da4;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        border: 1px solid transparent;
+        padding: 6px 12px;
+        font-size: 14px;
+        border-radius: 4px;
+    }
+        .btn-ordinary:hover {
+            color: #fff;
+            background-color: #286090;
+            border-color: #204d74;
+            text-decoration: none;
+        }
 </style>
 
 <p>
-    @Html.ActionLink("Креирајте нов продукт", "Create")
+    @Html.ActionLink("Креирајте нов продукт", "Create", "Products", new {@class="btn-ordinary"})
 </p>
 <table id="productsTable" class="table">
     <thead>
@@ -116,14 +135,14 @@
 <div>
     @if (User.IsInRole("Manager"))
     {
-        @Html.ActionLink("Промени улоги", "AddUserToRole", "Account")
+        @Html.ActionLink("Промени улоги", "AddUserToRole", "Account", new {@class="btn-ordinary"})
     }
 </div>
 
 
 @section scripts{
     <script>
-const { error } = require("jquery");
+
 
         $(document).ready(function () {
             $("#productsTable").DataTable();
