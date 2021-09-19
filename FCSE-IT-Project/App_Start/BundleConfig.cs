@@ -26,7 +26,7 @@ namespace FCSE_IT_Project
                       "~/Scripts/DataTables/dataTables.bootstrap.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
+                      "~/Content/bootstrap-freelancer.css",
                       "~/Content/site.css",
                        "~/Content/DataTables/css/dataTables.bootsrap.css"));
         }

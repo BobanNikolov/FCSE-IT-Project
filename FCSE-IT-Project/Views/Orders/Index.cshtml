@@ -60,12 +60,31 @@
             border-color: #d58512;
             text-decoration: none;
         }
+    .btn-ordinary {
+        color: #fff;
+        background-color: #337ab7;
+        border-color: #2e6da4;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        border: 1px solid transparent;
+        padding: 6px 12px;
+        font-size: 14px;
+        border-radius: 4px;
+    }
+
+        .btn-ordinary:hover {
+            color: #fff;
+            background-color: #286090;
+            border-color: #204d74;
+            text-decoration: none;
+        }
 </style>
 
 <h2>Почетна</h2>
 
 <p>
-    @Html.ActionLink("Креирајте нова нарачка", "Create")
+    @Html.ActionLink("Креирајте нова нарачка", "Create", "Orders", new { @class="btn-ordinary"})
 </p>
 <table id="ordersTable" class="table">
     <thead>
@@ -98,7 +117,7 @@
 <div>
     @if (User.IsInRole("Manager"))
     {
-        @Html.ActionLink("Промени улоги", "AddUserToRole", "Account")
+        @Html.ActionLink("Промени улоги", "AddUserToRole", "Account", new { @class = "btn-ordinary" })
     }
 </div>
 

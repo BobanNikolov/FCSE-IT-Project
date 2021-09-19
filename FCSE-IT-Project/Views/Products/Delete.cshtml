@@ -4,6 +4,47 @@
     ViewBag.Title = "Delete";
 }
 
+<style>
+    .btn-ordinary {
+        color: #fff;
+        background-color: #337ab7;
+        border-color: #2e6da4;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        border: 1px solid transparent;
+        padding: 6px 12px;
+        font-size: 14px;
+        border-radius: 4px;
+    }
+
+        .btn-ordinary:hover {
+            color: #fff;
+            background-color: #286090;
+            border-color: #204d74;
+            text-decoration: none;
+        }
+    .btn-delete {
+        color: #fff;
+        background-color: #d9534f;
+        border-color: #d43f3a;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        border: 1px solid transparent;
+        padding: 6px 12px;
+        font-size: 14px;
+        border-radius: 4px;
+    }
+
+        .btn-delete:hover {
+            color: #fff;
+            background-color: #ac2925;
+            border-color: #761c19;
+            text-decoration: none;
+        }
+</style>
+
 <h2>Избриши</h2>
 
 <h3>Дали сте сигурни дека сакате да го избришете продуктот?</h3>
@@ -37,19 +78,18 @@
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Избриши" class="btn btn-default" /> |
-            @Html.ActionLink("Назад кон листата на продукти", "Index")
-        </div>
-        <div>
-            @if (User.IsInRole("Manager"))
-            {
-                @Html.ActionLink("Промени улоги", "AddUserToRole", "Account")
-            }
-        </div> 
-     }
+<div class="form-actions no-color">
+    <input type="submit" value="Избриши" class="btn-delete" />
+    @Html.ActionLink("Назад кон листата на продукти", "Index", "Products", new { @class = "btn-ordinary" })
+    @if (User.IsInRole("Manager"))
+    {
+        @Html.ActionLink("Промени улоги", "AddUserToRole", "Account", new { @class = "btn-ordinary" })
+    }
+</div>
+    }
 
 </div>
