@@ -88,7 +88,6 @@
 <h2>Вашиот профил</h2>
 
 <div>
-    <br />
     <h4>Променете ги поставките на вашиот профил</h4>
     <hr />
     <dl class="dl-horizontal">
@@ -113,13 +112,20 @@
         </dd>
         <br />
         <div>
-            @Html.ActionLink("Назад кон листата на продукти", "Index", "Products", new { @class = "btn-ordinary" })
+            <a href="@Url.Action("Index", "Products")" class="btn-ordinary">
+                <span>Назад кон листата на продукти</span>
+            </a>
+            <a href="@Url.Action("Index", "Orders")" class="btn-ordinary">
+                <span>Назад кон листата на нарачки</span>
+            </a>
         </div>
         <br />
         <div>
             @if (User.IsInRole("Manager"))
             {
-                @Html.ActionLink("Промени улоги", "AddUserToRole", "Account", new { @class = "btn-ordinary" })
+            <a href="@Url.Action("AddUserToRole", "Account")" class="btn-ordinary">
+                <span>Промени улоги</span>
+            </a>
             }
         </div>
         

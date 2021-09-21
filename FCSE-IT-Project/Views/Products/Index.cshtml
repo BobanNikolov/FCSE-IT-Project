@@ -15,9 +15,9 @@
         text-decoration: none;
         display: inline-block;
         border: 1px solid transparent;
-        padding: 6px 12px;
+        padding: 8px 12px;
         font-size: 14px;
-        border-radius: 4px;
+        border-radius: 10px;
     }
 
         .btn-delete:hover {
@@ -35,9 +35,9 @@
         text-decoration: none;
         display: inline-block;
         border: 1px solid transparent;
-        padding: 6px 12px;
+        padding: 8px 12px;
         font-size: 14px;
-        border-radius: 4px;
+        border-radius: 10px;
     }
 
         .btn-details:hover {
@@ -55,9 +55,9 @@
         text-decoration: none;
         display: inline-block;
         border: 1px solid transparent;
-        padding: 6px 12px;
+        padding: 8px 12px;
         font-size: 14px;
-        border-radius: 4px;
+        border-radius: 10px;
     }
 
         .btn-edit:hover {
@@ -75,9 +75,9 @@
         text-decoration: none;
         display: inline-block;
         border: 1px solid transparent;
-        padding: 6px 12px;
+        padding: 8px 12px;
         font-size: 14px;
-        border-radius: 4px;
+        border-radius: 10px;
     }
         .btn-ordinary:hover {
             color: #fff;
@@ -86,6 +86,7 @@
             text-decoration: none;
         }
 </style>
+
 
 <p>
     @Html.ActionLink("Креирајте нов продукт", "Create", "Products", new {@class="btn-ordinary"})
@@ -135,7 +136,9 @@
 <div>
     @if (User.IsInRole("Manager"))
     {
-        @Html.ActionLink("Промени улоги", "AddUserToRole", "Account", new {@class="btn-ordinary"})
+        <a href="@Url.Action("AddUserToRole", "Account")" class="btn-ordinary">
+            <span>Промени улоги</span>
+        </a>
     }
 </div>
 

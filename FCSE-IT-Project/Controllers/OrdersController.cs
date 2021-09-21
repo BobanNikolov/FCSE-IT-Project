@@ -108,6 +108,7 @@ namespace FCSE_IT_Project.Controllers
             }
             ProductsRepository objordersRepository = new ProductsRepository();
             List<tmpProduct> tmpList = new List<tmpProduct>();
+            // db.tmpProducts.Select(l => l.OrderID == order.Id).ToList();
             foreach(var product in db.tmpProducts)
             {
                 if(product.OrderID == order.Id)
