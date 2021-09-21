@@ -13,9 +13,9 @@
         text-decoration: none;
         display: inline-block;
         border: 1px solid transparent;
-        padding: 6px 12px;
+        padding: 8px 12px;
         font-size: 14px;
-        border-radius: 4px;
+        border-radius: 10px;
     }
 
         .btn-delete:hover {
@@ -33,9 +33,9 @@
         text-decoration: none;
         display: inline-block;
         border: 1px solid transparent;
-        padding: 6px 12px;
+        padding: 8px 12px;
         font-size: 14px;
-        border-radius: 4px;
+        border-radius: 10px;
     }
 
         .btn-details:hover {
@@ -53,9 +53,9 @@
         text-decoration: none;
         display: inline-block;
         border: 1px solid transparent;
-        padding: 6px 12px;
+        padding: 8px 12px;
         font-size: 14px;
-        border-radius: 4px;
+        border-radius: 10px;
     }
 
         .btn-edit:hover {
@@ -87,10 +87,8 @@
 </style>
 
 <h2>Избриши</h2>
-
 <h3>Дали сте сигурни дека сакате да ја избришете оваа нарачка?</h3>
 <div>
-    <h4>Нарачка</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -108,11 +106,13 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Избриши" class="btn-delete" /> |
+            <input type="submit" value="Избриши" class="btn-delete" />
             @Html.ActionLink("Назад кон листата на нарачки", "Index", "Orders", new { @class = "btn-ordinary" })
             @if (User.IsInRole("Manager"))
             {
-                @Html.ActionLink("Промени улоги", "AddUserToRole", "Account", new { @class = "btn-ordinary" })
+                <a href="@Url.Action("AddUserToRole", "Account")" class="btn-ordinary">
+                    <span>Промени улоги</span>
+                 </a>
             }
         </div>
     }

@@ -3,17 +3,68 @@
     ViewBag.Title = "AddUserToRole";
 }
 
-<h2>Додадете корисник со соодветната e-mail адреса на соодветна улога:</h2>
+<style>
+    .btn-ordinary {
+        color: #fff;
+        background-color: #337ab7;
+        border-color: #2e6da4;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        border: 1px solid transparent;
+        padding: 8px 12px;
+        font-size: 14px;
+        border-radius: 10px;
+    }
+
+        .btn-ordinary:hover {
+            color: #fff;
+            background-color: #286090;
+            border-color: #204d74;
+            text-decoration: none;
+        }
+
+    .btn-delete {
+        color: #fff;
+        background-color: #d9534f;
+        border-color: #d43f3a;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        border: 1px solid transparent;
+        padding: 6px 12px;
+        font-size: 14px;
+        border-radius: 10px;
+    }
+
+        .btn-delete:hover {
+            color: #fff;
+            background-color: #ac2925;
+            border-color: #761c19;
+            text-decoration: none;
+        }
+</style>
+<h2>Додадете корисник со соодветната e-mail адреса на соодветна улога</h2>
+<hr />
 @using (Html.BeginForm("AddUserToRole", "Account"))
 {
     <div class="form-group">
         @Html.LabelFor(m => m.Email)
         @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
     </div>
+
     <div class="form-group">
         @Html.DropDownListFor(m => m.selectedRole, new SelectList(Model.roles), new { @class = "form-control" })
 
     </div>
-
-    <button class="btn btn-success" type="submit">Зачувај</button>
+    <br />
+    <div class="form-actions no-color">
+        <button class="btn btn-success" type="submit">Зачувај</button>
+        <a href="@Url.Action("Index", "Products")" class="btn-ordinary">
+            <span>Назад кон листата на продукти</span>
+        </a>
+        <a href="@Url.Action("Index", "Orders")" class="btn-ordinary">
+            <span>Назад кон листата на нарачки</span>
+        </a>
+    </div>
 }

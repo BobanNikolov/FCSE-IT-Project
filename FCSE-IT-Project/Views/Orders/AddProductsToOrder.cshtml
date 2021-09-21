@@ -8,7 +8,7 @@
 <script src="~/Scripts/jquery-3.4.1.js">
 
 </script>
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript">
     var products = [];
     var orderId = @Model.Item2.Id;
@@ -130,6 +130,12 @@
     }
 
     function confirmOrder() {
+        swal({
+            title: "Нарачката е успешно потврдена!",
+            text: " Може да се вратите кон другите нарачки",
+            icon: "success",
+            button: "Излези",
+        });
         var listOfTmpProducts = [];
         var tableTmpProduct = $("#tblProducts").find("tr:gt(0)");
 
@@ -158,6 +164,7 @@
             title: "Внесете лозинка за да ја потврдите нарачката",
             inputType: 'password',
             callback: function (result) {
+                debugger;
                 var password = result;
                 if (password == "1234") {
                     confirmOrder();
@@ -240,9 +247,9 @@
         text-decoration: none;
         display: inline-block;
         border: 1px solid transparent;
-        padding: 6px 12px;
+        padding: 8px 12px;
         font-size: 14px;
-        border-radius: 4px;
+        border-radius: 10px;
     }
 
         .btn-ordinary:hover {
@@ -355,7 +362,7 @@
 </fieldset>
 <br/>
 <div>
-    <input style="margin-top: 10px" type="submit" value="Зачувај нарачка" name="save" id="btnSaveOrder" class="btn btn-primary" />
+    <input style="margin-top: 10px" type="submit" value="Зачувај нарачка" name="save" id="btnSaveOrder" class="btn-ordinary" />
 </div>
 <br />
 <div>

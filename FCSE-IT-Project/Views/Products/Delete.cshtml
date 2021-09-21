@@ -13,9 +13,9 @@
         text-decoration: none;
         display: inline-block;
         border: 1px solid transparent;
-        padding: 6px 12px;
+        padding: 8px 12px;
         font-size: 14px;
-        border-radius: 4px;
+        border-radius: 10px;
     }
 
         .btn-ordinary:hover {
@@ -32,9 +32,9 @@
         text-decoration: none;
         display: inline-block;
         border: 1px solid transparent;
-        padding: 6px 12px;
+        padding: 8px 12px;
         font-size: 14px;
-        border-radius: 4px;
+        border-radius: 10px;
     }
 
         .btn-delete:hover {
@@ -49,7 +49,6 @@
 
 <h3>Дали сте сигурни дека сакате да го избришете продуктот?</h3>
 <div>
-    <h4>Продукт</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -87,7 +86,9 @@
     @Html.ActionLink("Назад кон листата на продукти", "Index", "Products", new { @class = "btn-ordinary" })
     @if (User.IsInRole("Manager"))
     {
-        @Html.ActionLink("Промени улоги", "AddUserToRole", "Account", new { @class = "btn-ordinary" })
+        <a href="@Url.Action("AddUserToRole", "Account")" class="btn-ordinary">
+        <span>Промени улоги</span>
+        </a>
     }
 </div>
     }
