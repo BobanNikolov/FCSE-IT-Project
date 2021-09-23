@@ -79,6 +79,25 @@
             border-color: #204d74;
             text-decoration: none;
         }
+
+    .btn-dodadi {
+        color: #fff;
+        background-color: #5cb85c;
+        border-color: #4cae4c;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        border: 1px solid transparent;
+        padding: 8px 12px;
+        font-size: 14px;
+        border-radius: 10px;
+    }
+    .btn-dodadi:hover {
+        color: #fff;
+        background-color: #449d44;
+        border-color: #398439;
+        text-decoration: none;
+    }
 </style>
 
 <h2>Почетна</h2>
@@ -102,7 +121,8 @@
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
                 <td>
-                    @Html.ActionLink("Промени", "AddProductsToOrder", new { id = item.Id }, new { @class = "btn-edit" })
+                    @Html.ActionLink("Промени", "Edit", new { id = item.Id }, new { @class = "btn-edit" })
+                    @Html.ActionLink("+ Додади продукти", "AddProductsToOrder", new { id = item.Id }, new { @class = "btn-dodadi" })
                     @Html.ActionLink("Детали", "Details", new { id = item.Id }, new { @class = "btn-details" })
                     @if (User.IsInRole("Manager"))
                     {
@@ -117,9 +137,12 @@
     @if (User.IsInRole("Manager"))
     {
         <a href="@Url.Action("AddUserToRole", "Account")" class="btn-ordinary">
-        <span>Промени улоги</span>
-        </a>    
+            <span>Промени улоги</span>
+        </a>
     }
+    <a href="@Url.Action("Index", "Home")" class="btn-ordinary">
+        <span>Почетна</span>
+    </a>
 </div>
 
 @section scripts{

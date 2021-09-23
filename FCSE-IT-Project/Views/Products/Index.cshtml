@@ -118,12 +118,13 @@
                     @Html.DisplayFor(modelItem => item.Price)
                 </td>
                 <td>
-                    <img src="@item.photoURL" style="max-width:200px" />
+                    <img src="@item.photoURL" style="max-width:200px; max-height:200px;" />
                 </td>
                 <td>
                     @if (User.IsInRole("Manager"))
                     {
                         @Html.ActionLink("Промени", "Edit", new { id = item.Id }, new { @class = "btn-edit" })
+
                         @Html.ActionLink("Избриши", "Delete", new { id = item.Id }, new { @class = "btn-delete" })
                     }
 
@@ -140,6 +141,9 @@
             <span>Промени улоги</span>
         </a>
     }
+    <a href="@Url.Action("Index", "Home")" class="btn-ordinary">
+        <span>Почетна</span>
+    </a>
 </div>
 
 
