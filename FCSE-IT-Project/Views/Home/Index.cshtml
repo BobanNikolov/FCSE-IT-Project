@@ -30,22 +30,29 @@
         </a>
     </div>
     <br />
-    <p><a href="https://www.finki.ukim.mk/mk/subject/%D0%B8%D0%BD%D1%82%D0%B5%D1%80%D0%BD%D0%B5%D1%82-%D1%82%D0%B5%D1%85%D0%BD%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D0%B8-0" class="btn btn-default btn-lg">Дознај повеќе &raquo;</a></p>
+
+    <p><a class="btn btn-default btn-lg" href="@Url.Action("About", "Home")">Дознај повеќе &raquo;</a></p>
 </div>
 <div class="row">
-    <div class="col-md-4">
-        <h2>Почетна идеја</h2>
-        <p>
-            Секојдневно сакале или не посетуваме кафе барови. Посетувањето на кафе бар веќе е врежано како секојдневна навика 
-            во многу од нас. Зошто не би сакале работата на вработените и уживањето на гостите во кафе барот да биде подобро, поубаво?
-            Позади ова прашање стои и самата идеја за овој проект. Целта е да се дигитилизира престојувањето во кафе барот.
-        </p>
-    </div>
-    <div class="col-md-4">
-        <h2>За авторот</h2>
-        <p>
-            Бобан Николов од Штип, студент од 3-та година при Факултетот за информатички науки и компјутерско инжинерство.     
-        </p>
-        
-    </div>
+    <div class="panel panel-default panel-body">
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2>Продукти</h2>
+                </div>
+                <div class="panel-body">
+                    @Html.ActionLink("Продукти", "Index", "Products", null, new { @class = "btn btn-default btn-block", style = "color: black; text-decoration:none;" })
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2>Нарачки</h2>
+                </div>
+                <div class="panel-body">
+                    @Html.ActionLink("Нарачки", "Index", "Orders", null, new { @class = "btn btn-default btn-block", style = "color: black; text-decoration:none;" })
+                </div>
+            </div>
+        </div>
 </div>

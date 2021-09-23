@@ -36,9 +36,9 @@
     });
 
     function addToTheProductList() {
-        var unitPrice = $("#txtProductPrice").val();
+        var unitPrice = parseInt($("#txtProductPrice").val());
         var quantity = parseInt($("#txtProductQuantity").val());
-        var productId = $("#Product").val();
+        var productId = parseInt($("#Product").val());
         var productName = $("#Product option:selected").text();
         var total = unitPrice * quantity;
         var flag = 0;
@@ -66,6 +66,7 @@
             products[tmp].quantity += quantity;
             products[tmp].price += total;
         } else if (flag == 0) {
+            product.quantity = quantity;
             products.push(product);
             debugger;
         }

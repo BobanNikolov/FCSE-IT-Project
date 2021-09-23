@@ -1,22 +1,28 @@
 ﻿@using Microsoft.AspNet.Identity
+
 @if (Request.IsAuthenticated)
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
-    @Html.AntiForgeryToken()
+        @Html.AntiForgeryToken()
 
-    <ul class="nav navbar-nav navbar-right">
-        <li>
-            @Html.ActionLink("Здраво " + User.Identity.GetUserName(), "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-        </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Одјава</a></li>
-    </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a onmouseover="this.style.color='#adadad'" onmouseout="this.style.color='black'" href="@Url.Action("Index", "Manage")" style="font-size: 18px; color:black; font-weight: 600; ">Мој профил</a>
+
+            </li>
+            <li><a onmouseover="this.style.color='#adadad'" onmouseout="this.style.color='black'" href="javascript:document.getElementById('logoutForm').submit()" style="font-size: 18px; color:black; font-weight: 600; ">Одјави се</a></li>
+        </ul>
     }
 }
 else
 {
     <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Регистрирај се", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink("Најави се", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        <li>
+            <a id="registerLink" onmouseover="this.style.color='#adadad'" onmouseout="this.style.color='black'" href="@Url.Action("Register", "Account")" style="font-size: 18px; color:black; font-weight: 600; ">Регистрирај се</a>
+        </li>
+        <li>
+            <a id="loginLink" onmouseover="this.style.color='#adadad" onmouseout="this.style.color='black'" href="@Url.Action("Login", "Account")" style="font-size: 18px; color:black; font-weight: 600; ">Најави се</a>
+        </li>
     </ul>
 }

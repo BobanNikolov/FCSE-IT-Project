@@ -10,7 +10,7 @@
 
 </head>
 <body>  
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-inverse navbar-fixed-top" style="background-color: #f5f8fa; border-bottom: 1px solid #cbd6e2; ">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -18,14 +18,12 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("bar.io", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <a class="navbar-brand" onmouseover="this.style.color='#adadad'" onmouseout="this.style.color='black'" href="@Url.Action("Index", "Home")" style="font-size: 24px; color:black; font-weight: 600; ">bar.io</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="@Url.Action("Index", "Products")">Продукти</a></li>
-                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="@Url.Action("Index", "Orders")">Нарачки</a></li>
-                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="@Url.Action("About", "Home")">За нас</a></li>
-                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="@Url.Action("Contact", "Home")">Контакт</a></li>
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" onmouseover="this.style.color='#adadad'" onmouseout="this.style.color='black'" href="@Url.Action("About", "Home")" style="font-size: 18px; color:black; font-weight: 600; ">За нас</a></li>
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" onmouseover="this.style.color='#adadad'" onmouseout="this.style.color='black'" href="@Url.Action("Contact", "Home")" style="font-size: 18px; color:black; font-weight: 600; ">Контакт</a></li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
