@@ -6,23 +6,24 @@
     {
         @Html.AntiForgeryToken()
 
-        <ul class="nav navbar-nav navbar-right">
-            <li>
+        <div class="nav-item dropdown">
+            <a href="#" onmouseover="this.style.color='#adadad'" onmouseout="this.style.color='black'" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle user-action" style="text-decoration: none; font-size: 18px; color: black; font-weight: 600; position: absolute; top: 10px; right: 0px">Профил<b class="caret" style="position: relative; top:-10px"></b></a>
+            <div class="dropdown-menu" style="position: absolute; top: 45px; left: -160px;">
                 <a onmouseover="this.style.color='#adadad'" onmouseout="this.style.color='black'" href="@Url.Action("Index", "Manage")" style="font-size: 18px; color:black; font-weight: 600; ">Мој профил</a>
-
-            </li>
-            <li><a onmouseover="this.style.color='#adadad'" onmouseout="this.style.color='black'" href="javascript:document.getElementById('logoutForm').submit()" style="font-size: 18px; color:black; font-weight: 600; ">Одјави се</a></li>
-        </ul>
+                <div class="divider dropdown-divider"></div>
+                <a onmouseover="this.style.color='#adadad'" onmouseout="this.style.color='black'" href="javascript:document.getElementById('logoutForm').submit()" style="font-size: 18px; color:black; font-weight: 600; "><span data-admin-icon=&#xe01c;></span>Одјави се</a>
+            </div>
+        </div>
     }
 }
 else
 {
-    <ul class="nav navbar-nav navbar-right">
-        <li>
+    <div class="nav-item dropdown">
+        <a href="#" onmouseover="this.style.color='#adadad'" onmouseout="this.style.color='black'" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle user-action" style="text-decoration: none; font-size: 18px; color: black; font-weight: 600; position: absolute; top: 10px; right: 0px">Профил<b class="caret" style="position: relative; top:15px; left: -75px;"></b></a>
+        <div class="dropdown-menu" style="position: absolute; top: 45px; left: 970px; max-width: 170px">
             <a id="registerLink" onmouseover="this.style.color='#adadad'" onmouseout="this.style.color='black'" href="@Url.Action("Register", "Account")" style="font-size: 18px; color:black; font-weight: 600; ">Регистрирај се</a>
-        </li>
-        <li>
+            <div class="divider dropdown-divider"></div>
             <a id="loginLink" onmouseover="this.style.color='#adadad" onmouseout="this.style.color='black'" href="@Url.Action("Login", "Account")" style="font-size: 18px; color:black; font-weight: 600; ">Најави се</a>
-        </li>
-    </ul>
+        </div>
+    </div>
 }

@@ -123,18 +123,21 @@ namespace FCSE_IT_Project.Controllers
 
         // POST: Orders/AddProductsToOrder
         [HttpPost]
-        public ActionResult AddProductsToOrder(List<tmpProduct> products)
+        public ActionResult AddProductsToOrder(List<tmpProduct> products, int orderId)
         {
             foreach(var product in db.tmpProducts)
             {
-                if(product.OrderID == products[0].OrderID)
+                if(product.OrderID == orderId)
                 {
                     db.tmpProducts.Remove(product);
                 }
             }
-            foreach(var product in products)
+            if (products != null)
             {
-                db.tmpProducts.Add(product);
+                foreach (var product in products)
+                {
+                    db.tmpProducts.Add(product);
+                }
             }
             db.SaveChanges();
             return RedirectToAction("Index");
