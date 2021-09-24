@@ -110,14 +110,45 @@
                 var password = result;
                 if (password == "izbrisi") {
                     $(productId).closest('tr').remove();
-                    FinalTotal();
+                    RemoveProductFromProductsList(productId);
                 } else {
-                    return;
+                    swal("Грешка", "Лозинката не се совпаѓа, обидете се повторно", "error");
                 }
             }
         });
 
     }
+    function RemoveProductFromProductsList(productId) {
+        var currentRow = $(productId).closest('tr');
+        var productID = parseInt(currentRow.find("td:eq(0)").text());
+        var productName = currentRow.find("td:eq(1)").text();
+        var quantity = parseInt(currentRow.find("td:eq(2)").text());
+        var total = parseInt(currentRow.find("td:eq(3)").text());
+
+        const product = {
+            orderID: orderId,
+            id: productID,
+            name: productName,
+            quant: quantity,
+            price: total,
+            quantity: quantity
+        };
+
+        var newArray = pom(products, product);
+
+        function pom(products, product) {
+            return products.filter(function (produkt) {
+                return produkt.id != product.id;
+            });
+        }
+        products = newArray;
+        console.log(products);
+        printProducts(products);
+        FinalTotal();
+        ResetItem();
+    }
+
+
     function RemoveProductSimple(productId) {
         $(productId).closest('tr').remove();
         debugger;
@@ -149,18 +180,24 @@
             tmpProduct.price = parseInt($(this).find("td:eq(3)").text());
             listOfTmpProducts.push(tmpProduct);
         });
-
+        console.log(listOfTmpProducts);
+        var dataObject = {};
+        dataObject.products = listOfTmpProducts;
+        dataObject.orderId = orderId;
+        console.log(dataObject.products);
+        console.log(dataObject);
 
         $.ajax({
             contentType: 'application/json; charset=utf-8',
             dataType: 'json',
             type: "POST",
             url: "/Orders/AddProductsToOrder",
-            data: JSON.stringify(listOfTmpProducts)
+            data: JSON.stringify(dataObject)
         });
     }
 
     function saveOrder() {
+
         bootbox.prompt({
             title: "Внесете лозинка за да ја потврдите нарачката",
             inputType: 'password',
@@ -170,7 +207,7 @@
                 if (password == "1234") {
                     confirmOrder();
                 } else {
-                    return;
+                    swal("Грешка", "Лозинката не се совпаѓа, обидете се повторно", "error");
                 }
             }
         });
