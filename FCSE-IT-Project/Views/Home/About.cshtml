@@ -1,6 +1,108 @@
 ﻿@{
     ViewBag.Title = "About";
 }
+<style>
+    .btn-delete {
+        color: #fff;
+        background-color: #d9534f;
+        border-color: #d43f3a;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        border: 1px solid transparent;
+        padding: 8px 12px;
+        font-size: 14px;
+        border-radius: 10px;
+    }
+
+        .btn-delete:hover {
+            color: #fff;
+            background-color: #ac2925;
+            border-color: #761c19;
+            text-decoration: none;
+        }
+
+    .btn-details {
+        color: #fff;
+        background-color: #5bc0de;
+        border-color: #46b8da;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        border: 1px solid transparent;
+        padding: 8px 12px;
+        font-size: 14px;
+        border-radius: 10px;
+    }
+
+        .btn-details:hover {
+            color: #fff;
+            background-color: #31b0d5;
+            border-color: #269abc;
+            text-decoration: none;
+        }
+
+    .btn-edit {
+        color: #fff;
+        background-color: #f0ad4e;
+        border-color: #eea236;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        border: 1px solid transparent;
+        padding: 8px 12px;
+        font-size: 14px;
+        border-radius: 10px;
+    }
+
+        .btn-edit:hover {
+            color: #fff;
+            background-color: #ec971f;
+            border-color: #d58512;
+            text-decoration: none;
+        }
+
+    .btn-ordinary {
+        color: #fff;
+        background-color: #337ab7;
+        border-color: #2e6da4;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        border: 1px solid transparent;
+        padding: 8px 12px;
+        font-size: 14px;
+        border-radius: 10px;
+    }
+
+        .btn-ordinary:hover {
+            color: #fff;
+            background-color: #286090;
+            border-color: #204d74;
+            text-decoration: none;
+        }
+    .text-sredina{
+        padding-left: 150px;
+        padding-right: 150px;
+        text-align: center;
+    }
+</style>
+
 <h2>bar.io</h2>
-<h5>Полесно управување со нарачки во кафе бар</h5>
-<h5>Дистрибуција на дигитално мени до корисниците</h5>
+<br />
+<h5 class="text-sredina"><b>bar.io</b> е систем за регулација на нарачки во еден кафе бар или дискотека.
+    Овој систем покрива внесување на продукти во база на податоци и нарачки во кои што соодветно се вметнуваат продукти.
+    Системов има за цел да го олесни процесот на вметнување продукти и нарачки на вработените во еден кафе бар и полесен преглед на продуктите за гостите во еден кафе бар или дискотека.
+    Воедно, bar.io како идеја се роди за изработка на семинарски проект по предметот Интернет Технологии при Факултетот за информатички науки и компјутерско инжинерство.
+    <br />
+    <hr/>
+    <b>ЗАБЕЛЕШКА</b>
+    <br />
+    Проектов не е конечен! Натамошната идеја е при скенирање на QR код да се пренасочува корисникот до листата на продукти и да може серверски да направи нарачка 
+    која што вработените ќе бидат во можност да ја гледаат и истата да ја спремаат. Со ова значително ќе се олесни работата во еден кафе бар или дискотека.
+    </h5>
+
+<br />
+<a href="@Url.Action("Index", "Home")" class="btn-ordinary">
+    <span>Почетна</span>
+</a>

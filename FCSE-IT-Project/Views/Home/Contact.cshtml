@@ -1,7 +1,90 @@
 ﻿@{
     ViewBag.Title = "Contact";
 }
+<style>
+    .btn-delete {
+        color: #fff;
+        background-color: #d9534f;
+        border-color: #d43f3a;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        border: 1px solid transparent;
+        padding: 8px 12px;
+        font-size: 14px;
+        border-radius: 10px;
+    }
+
+        .btn-delete:hover {
+            color: #fff;
+            background-color: #ac2925;
+            border-color: #761c19;
+            text-decoration: none;
+        }
+
+    .btn-details {
+        color: #fff;
+        background-color: #5bc0de;
+        border-color: #46b8da;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        border: 1px solid transparent;
+        padding: 8px 12px;
+        font-size: 14px;
+        border-radius: 10px;
+    }
+
+        .btn-details:hover {
+            color: #fff;
+            background-color: #31b0d5;
+            border-color: #269abc;
+            text-decoration: none;
+        }
+
+    .btn-edit {
+        color: #fff;
+        background-color: #f0ad4e;
+        border-color: #eea236;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        border: 1px solid transparent;
+        padding: 8px 12px;
+        font-size: 14px;
+        border-radius: 10px;
+    }
+
+        .btn-edit:hover {
+            color: #fff;
+            background-color: #ec971f;
+            border-color: #d58512;
+            text-decoration: none;
+        }
+
+    .btn-ordinary {
+        color: #fff;
+        background-color: #337ab7;
+        border-color: #2e6da4;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        border: 1px solid transparent;
+        padding: 8px 12px;
+        font-size: 14px;
+        border-radius: 10px;
+    }
+
+        .btn-ordinary:hover {
+            color: #fff;
+            background-color: #286090;
+            border-color: #204d74;
+            text-decoration: none;
+        }
+</style>
+
 <h2>bar.io</h2>
+<strong>Бобан Николов</strong>
 <address>
     Крушевска Република 79<br />
     2000 Штип, Р. Македонија<br />
@@ -11,3 +94,6 @@
 <address>
     <strong>Техничка поддршка:</strong>   <a href="mailto:boban.nikolov@students.finki.ukim.mk">boban.nikolov@students.finki.ukim.mk</a><br />
 </address>
+<a href="@Url.Action("Index", "Home")" class="btn-ordinary">
+    <span>Почетна</span>
+</a>
